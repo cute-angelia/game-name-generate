@@ -37,7 +37,7 @@
           <div :class="`col-md-2`" style="line-height: 56px;">
             <div class="at-box-row bg-c-brand-dark"></div>性别
           </div>
-          <div :class="`col-md-22`" style="line-height: 36px;">
+          <div :class="`col-md-22`" style="line-height: 36px;text-align: left;">
             <div class="at-box-row bg-c-brand-light">
               <at-checkbox v-model="sex_boy" label="男" checked>男</at-checkbox>
               <at-checkbox v-model="sex_girl" label="女">女</at-checkbox>
@@ -58,7 +58,7 @@
           </div>
           <div :class="`col-md-22`">
             <div class="at-box-row bg-c-brand-light">
-              <at-textarea min-rows="4" max-rows="40" v-model="output" placeholder></at-textarea>
+              <at-textarea min-rows="40" max-rows="140" v-model="output" placeholder></at-textarea>
             </div>
           </div>
 

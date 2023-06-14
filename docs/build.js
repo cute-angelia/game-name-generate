@@ -13195,19 +13195,13 @@ function makeBoy() {
   var second = "";
 
   // 八种组合
-  var choice = Math.floor(Math.random() * 4 + 1);
+  var choice = Math.random() < 0.7 ? 1 : 2;
   switch (choice) {
     case 1:
       second = getOneInNameArray(boy2);
       break;
     case 2:
       second = getOneInNameArray(boy1);
-      break;
-    case 3:
-      second = getOneInNameArray(boy1) + getOneInNameArray(girl1);
-      break;
-    case 4:
-      second = getOneInNameArray(boy1) + getOneInNameArray(boy1);
       break;
   }
   return first + second;
@@ -13218,19 +13212,13 @@ function makeGirl() {
   var second = "";
 
   // 八种组合
-  var choice = Math.floor(Math.random() * 4 + 1);
+  var choice = Math.random() < 0.7 ? 1 : 2;
   switch (choice) {
     case 1:
       second = getOneInNameArray(girl2);
       break;
     case 2:
       second = getOneInNameArray(girl1);
-      break;
-    case 3:
-      second = getOneInNameArray(girl1) + getOneInNameArray(boy1);
-      break;
-    case 4:
-      second = getOneInNameArray(girl1) + getOneInNameArray(girl1);
       break;
   }
   return first + second;

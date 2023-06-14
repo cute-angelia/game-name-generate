@@ -58,7 +58,7 @@
           </div>
           <div :class="`col-md-22`">
             <div class="at-box-row bg-c-brand-light">
-              <at-textarea min-rows="40" max-rows="140" v-model="output" placeholder></at-textarea>
+              <at-textarea min-rows="20" max-rows="100" v-model="output" placeholder></at-textarea>
             </div>
           </div>
 
@@ -85,7 +85,7 @@ export default {
     return {
       sex_boy: true,
       sex_girl: true,
-      numz: 10,
+      numz: 20,
       output: "",
     };
   },

@@ -1,307 +1,586 @@
 <template>
-  <div class="container" id="app">
-    <div class="app">
-      <header data-v-8086e85e id="J-page-header" class="page-header collapse">
-        <div class="nav-container">
-          <div class="nav-left">
-            <div class="logo">
-              <a href="#/zh" class="router-link-active">
-                <img
-                  src="data:image/png;base64,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"
-                  preload
-                  class="logo-img"
-                />
-                <span>游戏姓名生成器</span>
-              </a>
-            </div>
-            <i class="icon icon-menu nav-icon"></i>
-          </div>
-          <div class="nav-right">
-            <ul class="navbar">
-              <li>
-                <a href="#/" class>首页</a>
-              </li>
-              <li>
-                <a
-                  target="_blank"
-                  href="https://github.com/cute-angelia/game-name-generate"
-                  class
-                >Github</a>
-              </li>
-            </ul>
+  <main class="shell">
+    <section class="workspace">
+      <aside class="control-panel">
+        <div class="brand">
+          <img src="./assets/name-forge-logo.svg" alt="" />
+          <div>
+            <p class="eyebrow">Name Forge</p>
+            <h1>姓名生成器</h1>
           </div>
         </div>
-      </header>
-      <div width="600px">
-        <div class="row at-row">
-          <div :class="`col-md-2`" style="line-height: 56px;">
-            <div class="at-box-row bg-c-brand-dark"></div>性别
-          </div>
-          <div :class="`col-md-22`" style="line-height: 36px;text-align: left;">
-            <div class="at-box-row bg-c-brand-light">
-              <at-checkbox v-model="sex_boy" label="男" checked>男</at-checkbox>
-              <at-checkbox v-model="sex_girl" label="女">女</at-checkbox>
-            </div>
-          </div>
 
-          <div :class="`col-md-2`" style="line-height: 46px;">
-            <div class="at-box-row bg-c-brand-dark"></div>个数
-          </div>
-          <div :class="`col-md-22`" style="line-height: 46px;">
-            <div class="at-box-row bg-c-brand-light">
-              <at-input v-model="numz" placeholder></at-input>
-            </div>
-          </div>
+        <div class="logic-note">
+          <p>{{ currentCategoryDescription }}</p>
+        </div>
 
-          <div :class="`col-md-2`" style="line-height: 46px;">
-            <div class="at-box-row bg-c-brand-dark"></div>输出
-          </div>
-          <div :class="`col-md-22`">
-            <div class="at-box-row bg-c-brand-light">
-              <at-textarea min-rows="20" max-rows="100" v-model="output" placeholder></at-textarea>
-            </div>
-          </div>
+        <div class="field">
+          <label for="sex">性别</label>
+          <select id="sex" v-model="sex">
+            <option value="all">全部</option>
+            <option value="boy">男</option>
+            <option value="girl">女</option>
+          </select>
+        </div>
 
-          <div :class="`col-md-2`">
-            <div class="at-box-row bg-c-brand-dark"></div>
+        <div class="field">
+          <label for="category">分类</label>
+          <select id="category" v-model="category">
+            <option
+              v-for="item in categories"
+              :key="item.value"
+              :value="item.value"
+            >
+              {{ item.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="count">个数</label>
+          <input id="count" v-model.number="count" type="number" min="1" :max="maxCount" />
+        </div>
+
+        <p v-if="error" class="error">{{ error }}</p>
+
+        <div class="actions">
+          <button type="button" class="primary" @click="generateNames">
+            <Sparkles :size="18" />
+            生成
+          </button>
+          <button type="button" class="secondary" @click="clearNames">
+            <Eraser :size="18" />
+            清空
+          </button>
+        </div>
+
+        <p class="license-note">商用需获得作者书面授权</p>
+      </aside>
+
+      <section class="result-panel">
+        <div class="result-head">
+          <div>
+            <p class="eyebrow">Generated</p>
+            <h2>{{ currentCategoryLabel }}</h2>
           </div>
-          <div :class="`col-md-22`" style="line-height: 46px;">
-            <div class="at-box-row bg-c-brand-light">
-              <at-button type="primary" @click="ok">生成</at-button>&nbsp;&nbsp;
-              <at-button @click="clear">清空</at-button>&nbsp;&nbsp;
-            </div>
+          <div class="result-tools">
+            <button type="button" :disabled="!resultList.length" @click="generateNames">
+              <RefreshCw :size="16" />
+              换一批
+            </button>
+            <span>{{ resultList.length }} 个</span>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+        <p v-if="copyMessage" class="copy-toast">{{ copyMessage }}</p>
+
+        <div class="name-grid" aria-live="polite">
+          <button
+            v-for="(name, index) in resultList"
+            :key="`${name}-${index}`"
+            type="button"
+            :class="['name-slip', { 'name-slip-long': name.length >= 4 }]"
+            @click="copyName(name)"
+          >
+            {{ name }}
+          </button>
+          <div v-if="!resultList.length" class="empty-state">
+            <Wand2 :size="34" />
+            <span>点击生成</span>
+          </div>
+        </div>
+
+        <textarea v-model="output" readonly aria-label="生成结果"></textarea>
+      </section>
+    </section>
+  </main>
 </template>
 
-<script>
-import generate from "./name.js";
+<script setup>
+import { computed, ref, watch } from 'vue'
+import { Eraser, RefreshCw, Sparkles, Wand2 } from 'lucide-vue-next'
+import generate, { getGenerationLimit, getNameCategories } from './name.js'
 
-export default {
-  data() {
-    return {
-      sex_boy: true,
-      sex_girl: true,
-      numz: 20,
-      output: "",
-    };
-  },
-  methods: {
-    ok() {
-      if (parseInt(this.numz) <= 0) {
-        alert("填写数量有误");
-        return;
-      } else {
-        this.numz = parseInt(this.numz);
-      }
+const sex = ref('all')
+const category = ref('all')
+const categories = getNameCategories()
+const count = ref(20)
+const output = ref('')
+const error = ref('')
+const copyMessage = ref('')
+let copyTimer = 0
 
-      var str = "";
-      if (this.sex_boy && this.sex_girl) {
-        str = generate(this.numz, "all");
-      } else if (this.sex_boy) {
-        str = generate(this.numz, "boy");
-      } else {
-        str = generate(this.numz, "girl");
-      }
-      this.output = str;
-      console.log(this.sex_boy, this.sex_girl, this.numz);
-    },
-    clear() {
-      this.output = "";
-    },
-  },
-};
+const resultList = computed(function () {
+  return output.value.trim() ? output.value.trim().split('\n') : []
+})
+
+const currentCategoryLabel = computed(function () {
+  const selected = categories.find(function (item) {
+    return item.value === category.value
+  })
+  return selected ? selected.label : '全部分类'
+})
+
+const currentCategoryDescription = computed(function () {
+  const selected = categories.find(function (item) {
+    return item.value === category.value
+  })
+  return selected && selected.description ? selected.description : '基于基础大词库生成，按分类黑名单过滤，批量生成时避免同批次重复。'
+})
+
+const maxCount = computed(function () {
+  return getGenerationLimit(getSexValue() || 'all', category.value)
+})
+
+watch([sex, category], function () {
+  if (resultList.value.length) {
+    generateNames()
+  }
+})
+
+function getSexValue() {
+  return sex.value
+}
+
+function generateNames() {
+  const total = Number(count.value)
+  const sex = getSexValue()
+
+  if (!sex) {
+    error.value = '至少选择一个性别'
+    return
+  }
+
+  if (!Number.isInteger(total) || total <= 0 || total > maxCount.value) {
+    error.value = `当前条件最多可生成 ${maxCount.value} 个不重复姓名`
+    return
+  }
+
+  error.value = ''
+  copyMessage.value = ''
+
+  try {
+    output.value = generate(total, sex, category.value)
+  } catch (err) {
+    error.value = err.message || '生成失败'
+  }
+}
+
+function clearNames() {
+  error.value = ''
+  copyMessage.value = ''
+  output.value = ''
+}
+
+async function copyName(name) {
+  try {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(name)
+    }
+  } catch (err) {
+    console.warn('copy failed', err)
+  }
+
+  copyMessage.value = `已复制：${name}`
+  window.clearTimeout(copyTimer)
+  copyTimer = window.setTimeout(function () {
+    copyMessage.value = ''
+  }, 1600)
+}
 </script>
 
 <style>
-.container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
-    sans-serif;
+:root {
+  color: #17211e;
+  background: #eef3ec;
+  font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.app {
-  color: #2c3e50;
-  text-align: center;
-}
-h1,
-h2 {
-  font-weight: normal;
-  margin: 16px 0;
+  --ink: #17211e;
+  --muted: #66756f;
+  --paper: #fbfaf3;
+  --paper-deep: #efe6d2;
+  --jade: #16746b;
+  --jade-dark: #0d4f4a;
+  --cinnabar: #c74a2d;
+  --blue: #284d7a;
+  --line: rgba(23, 33, 30, 0.15);
 }
 
-.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background-color: transparent;
-  transition: all 0.3s;
-  z-index: 100;
+* {
+  box-sizing: border-box;
 }
-.page-header.collapse {
-  background-color: #fff;
-  box-shadow: 0 10px 60px 0 rgba(29, 29, 31, 0.07);
-  opacity: 0.98;
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
 }
-.page-header.open {
-  background-color: #fff;
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  letter-spacing: 0;
 }
-.nav-container {
+
+button {
+  cursor: pointer;
+}
+
+.shell {
+  min-height: 100vh;
+  padding: 32px;
+  background:
+    linear-gradient(90deg, rgba(23, 33, 30, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(23, 33, 30, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 22% 18%, rgba(22, 116, 107, 0.18), transparent 30%),
+    linear-gradient(135deg, #f7f3e7 0%, #dfeeea 48%, #f1e4d5 100%);
+  background-size: 34px 34px, 34px 34px, 100% 100%, 100% 100%;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
+  gap: 26px;
+  width: min(1180px, 100%);
+  min-height: calc(100vh - 64px);
   margin: 0 auto;
-  width: 90%;
-  color: #1d1d1f;
 }
-.nav-container .nav-left {
-  float: left;
+
+.control-panel,
+.result-panel {
+  border: 1px solid var(--line);
+  background: rgba(251, 250, 243, 0.9);
+  box-shadow: 0 24px 70px rgba(35, 42, 33, 0.14);
+  backdrop-filter: blur(18px);
 }
-.nav-container .nav-left .logo {
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px;
+  border-radius: 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand img {
+  width: 54px;
+  height: 54px;
+}
+
+.logic-note {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(22, 116, 107, 0.18);
+  border-radius: 6px;
+  background: rgba(217, 235, 228, 0.52);
+}
+
+.logic-note p,
+.license-note {
+  margin: 0;
+}
+
+.logic-note p {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.license-note {
+  color: var(--cinnabar);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--cinnabar);
+  font-family: "Gill Sans", "Trebuchet MS", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(24px, 3vw, 36px);
+}
+
+.field {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+select,
+input {
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.name-slip:hover,
+.actions button:hover {
+  transform: translateY(-2px);
+}
+
+select,
+input {
+  width: 100%;
+  padding: 0 14px;
+}
+
+.error {
+  margin: 0;
+  padding: 12px 14px;
+  border-left: 4px solid var(--cinnabar);
+  color: #8a2d1d;
+  background: rgba(199, 74, 45, 0.1);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 800;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.primary {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 14px 28px rgba(23, 33, 30, 0.22);
+}
+
+.secondary {
+  color: var(--jade-dark);
+  background: #d9ebe4;
+}
+
+.license-note {
+  text-align: center;
+}
+
+.result-panel {
   position: relative;
-  height: 80px;
-  line-height: 80px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 22px;
+  padding: 30px;
+  border-radius: 8px;
+  overflow: hidden;
 }
-.nav-container .nav-left .logo img {
+
+.result-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.result-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-tools button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(22, 116, 107, 0.2);
+  border-radius: 999px;
+  color: var(--jade-dark);
+  background: rgba(217, 235, 228, 0.72);
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.result-tools button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.result-tools button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.result-tools span {
+  min-width: 66px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--blue);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.copy-toast {
   position: absolute;
-  top: 50%;
-  margin-top: -15px;
-  width: 30px;
-  height: 30px;
+  top: 92px;
+  right: 30px;
+  z-index: 3;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(22, 116, 107, 0.2);
+  border-radius: 6px;
+  color: var(--jade-dark);
+  background: rgba(239, 250, 245, 0.94);
+  box-shadow: 0 14px 32px rgba(23, 33, 30, 0.14);
+  font-size: 14px;
+  font-weight: 800;
+  pointer-events: none;
 }
-.nav-container .nav-left .logo span {
-  margin-left: 40px;
-  color: #3473e7;
-  font-weight: bold;
-  font-size: 16px;
+
+.name-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  align-content: start;
+  gap: 12px;
+  min-height: 320px;
 }
-.nav-container .nav-left .nav-icon {
-  display: none;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  margin-top: -10px;
+
+.name-slip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 74px;
+  padding: 0 10px;
+  border: 1px solid rgba(23, 33, 30, 0.16);
+  border-radius: 5px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(239, 230, 210, 0.72)),
+    var(--paper);
+  box-shadow: inset 0 -4px 0 rgba(199, 74, 45, 0.12);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.name-slip-long {
   font-size: 20px;
 }
-.nav-container .nav-right {
-  float: right;
+
+.name-slip:hover {
+  box-shadow: inset 0 -4px 0 rgba(199, 74, 45, 0.22), 0 16px 30px rgba(23, 33, 30, 0.12);
 }
-.nav-container .nav-right .navbar {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  height: 80px;
-  font-size: 14px;
-  line-height: 80px;
-  list-style-type: none;
-}
-.nav-container .nav-right .navbar a {
-  display: inline-block;
-  color: #1d1d1f;
-}
-.nav-container .nav-right .navbar a::after {
-  content: "";
-  display: none;
+
+.empty-state {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  color: var(--muted);
+}
+
+textarea {
   width: 100%;
-  background-color: #6190e8;
+  min-height: 132px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.55);
+  resize: vertical;
 }
-.nav-container .nav-right .navbar a.router-link-active {
-  color: #6190e8;
-}
-.nav-container .nav-right .navbar a.router-link-active::after {
-  display: inline-block;
-}
-.nav-container .nav-right .navbar li {
-  position: relative;
-  display: inline-block;
-  margin: 0 24px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.nav-container .nav-right .navbar li:hover {
-  color: #6190e8;
-}
-.nav-container .nav-right .navbar li:hover a {
-  color: #6190e8;
-}
-.nav-container .nav-right .navbar li.disabled {
-  color: #c9c9c9;
-  cursor: not-allowed;
-}
-.nav-container .nav-right .btn-language {
-  display: inline-block;
-  margin: 0 24px;
-  padding: 2px 12px;
-  border: 1px solid #1d1d1f;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: color 0.3s, border 0.3s;
-}
-.nav-container .nav-right .btn-language:hover {
-  color: #6190e8;
-  border-color: #6190e8;
-}
-@media screen and (max-width: 767px) {
-  .page-header {
-    height: 60px;
+
+@media (max-width: 820px) {
+  .shell {
+    padding: 16px;
   }
-  .page-header.open .nav-right {
-    height: 220px;
+
+  .workspace {
+    grid-template-columns: 1fr;
+    min-height: auto;
   }
-  .nav-container {
-    width: initial;
+
+  .control-panel,
+  .result-panel {
+    padding: 20px;
   }
-  .nav-container .nav-left {
-    position: relative;
-    margin: 0 20px;
-    float: none;
-    text-align: center;
+
+  .result-head {
+    align-items: flex-start;
+    flex-direction: column;
   }
-  .nav-container .nav-left .logo {
-    display: inline-block;
-    height: 60px;
-    line-height: 60px;
-  }
-  .nav-container .nav-left .nav-icon {
-    display: inline-block;
-  }
-  .nav-container .nav-right {
-    float: none;
-    height: 0;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0 10px 60px 0 rgba(29, 29, 31, 0.07);
-    transition: all 0.3s;
-    overflow: hidden;
-  }
-  .nav-container .nav-right .navbar {
-    display: block;
-    height: initial;
-    line-height: 50px;
-  }
-  .nav-container .nav-right .navbar li {
-    display: block;
-  }
-  .nav-container .nav-right .navbar a {
+
+  .result-tools {
     width: 100%;
+    justify-content: space-between;
   }
-  .nav-container .nav-right .navbar a.router-link-active::after {
-    display: none;
+
+  .copy-toast {
+    top: 96px;
+    right: 20px;
+    left: 20px;
+    text-align: center;
   }
-  .nav-container .nav-right .btn-language {
-    margin: 16px;
+
+  .name-grid {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  }
+
+  .name-slip {
+    font-size: 22px;
+  }
+
+  .name-slip-long {
+    font-size: 18px;
   }
 }
 </style>

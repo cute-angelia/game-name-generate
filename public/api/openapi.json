@@ -1,0 +1,28 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "姓名生成器数据接口",
+    "version": "2.0.0",
+    "description": "供 agent 获取分类词库、分类说明和声调规则的静态数据接口。商业使用需获得作者书面授权。"
+  },
+  "paths": {
+    "/api/name-data.json": {
+      "get": {
+        "summary": "获取姓名分类词库与声调规则",
+        "responses": {
+          "200": {
+            "description": "分类词库数据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["version", "license", "toneRules", "categories"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

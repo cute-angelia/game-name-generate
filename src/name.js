@@ -1,3 +1,5 @@
+import { pinyin } from 'pinyin-pro'
+
 var boy2 = ["煜洋", "雨泽", "越泽", "之玉", "锦程", "修杰", "烨伟", "尔曼", "立辉", "致远", "天思", "友绿", "聪健", "修洁", "平灵", "源智", "烨华", "振家", "越彬",
   "子轩", "伟宸", "晋鹏", "觅松", "海亦", "雨珍", "浩宇", "嘉熙", "志泽", "苑博", "念波", "峻熙", "俊驰", "聪展", "南松", "黎昕", "谷波", "凝海", "靖易",
   "渊思", "煜祺", "乐驹", "风华", "睿渊", "博超", "天磊", "夜白", "初晴", "瑾瑜", "鹏飞", "弘文", "伟泽", "迎松", "雨泽", "白易", "远航", "晓啸", "智宸",
@@ -45,6 +47,49 @@ var boy1 = ["宇", "翔", "飞", "雄", "帅", "涛", "强", "斌", "昊", "伟"
 
 var girl1 = ["美", "娜", "秀", "雯", "蕾", "洁", "思", "慧", "心", "涵", "静", "英", "晓", "琳", "珊", "莉", "佳", "婷", "璐", "晨", "安", "包", "贝", "冰", "蓓", "珂", "柏", "琳", "菲", "怡", "娜", "心", "洁", "梓", "瑶", "珊", "艾", "诗", "璐", "倩", "苏", "雯", "婧", "秀", "慧", "彤", "媛", "美", "晶", "琪", "云", "萍", "蕾", "莉", "莹", "薇", "楠", "楚", "佳", "爽", "卓", "格", "斌", "羽", "茜", "婷", "琦", "绮", "燕", "张", "青", "红", "翠", "帆", "离", "莲", "宜", "园", "冬", "霜"]
 
+var categoryRules = {
+  xianxia: {
+    label: "仙侠",
+    description: "从基础大词库中过滤明显现代、年代感、生活化的常用字，保留更适合修真、宗门和山海意象的姓名。",
+    keywords: ["修真", "宗门", "灵气", "山海", "剑修"],
+    blacklist: ["国", "建", "军", "伟", "强", "斌", "勇", "刚", "涛", "栋", "昌", "朋", "宏", "达", "康", "平", "志", "华", "东", "光", "明", "辉", "忠", "民", "胜", "利", "富", "贵", "财", "宝", "家", "校", "城", "坪"]
+  },
+  modern: {
+    label: "现代都市",
+    description: "从基础大词库中过滤强江湖、兵器、玄幻和古风色彩的字，保留更接近日常、职场和校园语感的姓名。",
+    keywords: ["都市", "职场", "校园", "清爽", "现实"],
+    blacklist: ["客", "刀", "剑", "侠", "魔", "妖", "鬼", "魂", "魄", "玄", "烬", "阙", "曜", "狱", "煞", "孤", "冷", "断", "血", "苍", "擎", "霆", "啸", "狂", "虎", "龙"]
+  },
+  jianghu: {
+    label: "江湖武侠",
+    description: "从基础大词库中过滤现代年代感、商务感和软萌网感的字，保留更适合门派、侠客和行走江湖的姓名。",
+    keywords: ["江湖", "侠客", "门派", "刀剑", "快意"],
+    blacklist: ["国", "建", "军", "伟", "强", "斌", "勇", "刚", "宏", "达", "康", "平", "洋", "鑫", "校", "坪", "甜", "萌", "柠", "橙", "梓", "涵", "诺", "恬", "怡"]
+  },
+  fantasy: {
+    label: "玄幻",
+    description: "从基础大词库中过滤过于现实、年代感和日常生活化的字，保留更适合异世、神魔和力量体系的姓名。",
+    keywords: ["玄幻", "神魔", "异世", "星海", "血脉"],
+    blacklist: ["国", "建", "军", "伟", "强", "斌", "刚", "宏", "达", "康", "平", "华", "东", "光", "民", "富", "贵", "财", "宝", "家", "校", "坪", "甜", "萌", "柠", "橙"]
+  }
+}
+
+var toneRules = {
+  givenNameLength: 2,
+  allowedPatterns: ["level-oblique", "oblique-level"],
+  levelTones: [1, 2],
+  obliqueTones: [3, 4],
+  description: "双字名必须一二声搭配三四声，或三四声搭配一二声；姓氏不参与声调判断。"
+}
+
+var categoryOptions = [
+  { value: "all", label: "全部分类" },
+  { value: "xianxia", label: categoryRules.xianxia.label },
+  { value: "modern", label: categoryRules.modern.label },
+  { value: "jianghu", label: categoryRules.jianghu.label },
+  { value: "fantasy", label: categoryRules.fantasy.label }
+]
+
 /*
 男双名	1086240	优先使用 BOY
 女双名	2015248
@@ -61,23 +106,145 @@ function getOneInNameArray(arrays) {
   return arrays[index]
 }
 
-function makeBoy() {
-  var first = getOneInNameArray(xing)
-  var second = ""
+function getUniqueItems(items) {
+  return Array.from(new Set(items))
+}
 
-  // 八种组合
-  var choice = Math.random() < 0.7 ? 1 : 2
-  switch (choice) {
-    case 1:
-      second = getOneInNameArray(boy2)
-      break;
-    case 2:
-      second = getOneInNameArray(boy1)
-      break;
+function shuffle(items) {
+  var copied = items.slice()
+  var i = copied.length - 1
+
+  for (; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1))
+    var current = copied[i]
+    copied[i] = copied[j]
+    copied[j] = current
   }
+
+  return copied
+}
+
+function getNameCategories() {
+  return categoryOptions.map(function (category) {
+    var detail = categoryRules[category.value]
+
+    if (!detail) {
+      return category
+    }
+
+    return {
+      value: category.value,
+      label: category.label,
+      description: detail.description,
+      keywords: detail.keywords.slice(),
+      blacklist: detail.blacklist.slice()
+    }
+  })
+}
+
+function getToneGroup(char) {
+  var value = pinyin(char, { toneType: 'num', type: 'array' })[0] || ''
+  var tone = Number(value.replace(/^\D+/, ''))
+
+  if (tone == 1 || tone == 2) {
+    return "level"
+  }
+
+  if (tone == 3 || tone == 4) {
+    return "oblique"
+  }
+
+  return ""
+}
+
+function getTonePattern(name) {
+  if (!name || name.length != 2) {
+    return "single"
+  }
+
+  var first = getToneGroup(name.charAt(0))
+  var second = getToneGroup(name.charAt(1))
+
+  if (!first || !second) {
+    return "unknown"
+  }
+
+  if (first == "level" && second == "oblique") {
+    return "level-oblique"
+  }
+
+  if (first == "oblique" && second == "level") {
+    return "oblique-level"
+  }
+
+  return "same-group"
+}
+
+function hasBlacklistedChar(name, category) {
+  var rule = categoryRules[category]
+
+  if (!rule) {
+    return false
+  }
+
+  return rule.blacklist.some(function (char) {
+    return name.indexOf(char) != -1
+  })
+}
+
+function isToneMatched(name) {
+  var pattern = getTonePattern(name)
+  return pattern == "single" || toneRules.allowedPatterns.indexOf(pattern) != -1
+}
+
+function getBasePool(sex) {
+  if (sex == "boy") {
+    return boy2.concat(boy1)
+  }
+
+  return girl2.concat(girl1)
+}
+
+function getCategoryPool(sex, category) {
+  var selected = []
+
+  selected = getBasePool(sex).filter(function (name) {
+    return !hasBlacklistedChar(name, category) && isToneMatched(name)
+  })
+
+  return getUniqueItems(selected)
+}
+
+function getGivenNamePool(sex, category) {
+  if (sex == "all") {
+    return getUniqueItems(getCategoryPool("boy", category).concat(getCategoryPool("girl", category)))
+  }
+
+  return getCategoryPool(sex, category)
+}
+
+function getGenerationLimit(sex, category) {
+  return Math.min(getUniqueItems(xing).length, getGivenNamePool(sex, category || "all").length)
+}
+
+function makeName(sex, category) {
+  var first = getOneInNameArray(xing)
+  var pool = getCategoryPool(sex, category)
+  var second = getOneInNameArray(pool)
+
   return first + second
 }
 
+function makeBoy(category) {
+  return makeName("boy", category)
+}
+
+function makeGirl(category) {
+  return makeName("girl", category)
+}
+
+/*
+保留原始词库，后续如果需要恢复“通用随机”可以继续使用。
 function makeGirl() {
   var first = getOneInNameArray(xing)
   var second = ""
@@ -94,34 +261,61 @@ function makeGirl() {
   }
   return first + second
 }
+*/
 
-function generate(num, sex) {
+function generate(num, sex, category) {
   var i = 0;
   var str = "";
+  var selectedCategory = category || "all"
+  var selectedSex = sex || "all"
+  var max = getGenerationLimit(selectedSex, selectedCategory)
+  var surnames = shuffle(getUniqueItems(xing))
+  var givenNames = shuffle(getGivenNamePool(selectedSex, selectedCategory))
+
+  if (num > max) {
+    throw new RangeError("最多可生成 " + max + " 个不重复姓名")
+  }
 
   for (; i < num; i++) {
-    if (sex == "boy") {
-      str = str + makeBoy() + "\n";
-    }
-    if (sex == "girl") {
-      str = str + makeGirl() + "\n";
-    }
-    if (sex == "all") {
-      var choice = Math.floor((Math.random() * 2) + 1)
-      switch (choice) {
-        case 1:
-          str = str + makeBoy() + "\n";
-          break;
-        case 2:
-          str = str + makeGirl() + "\n";
-          break;
-      }
-    }
+    str = str + surnames[i] + givenNames[i] + "\n";
   }
 
   return str
 }
 
+function getNameDataset() {
+  var categories = {}
+  var categoryKey
+
+  for (categoryKey in categoryRules) {
+    categories[categoryKey] = {
+      label: categoryRules[categoryKey].label,
+      description: categoryRules[categoryKey].description,
+      keywords: categoryRules[categoryKey].keywords.slice(),
+      blacklist: categoryRules[categoryKey].blacklist.slice(),
+      availableCounts: {
+        boy: getCategoryPool("boy", categoryKey).length,
+        girl: getCategoryPool("girl", categoryKey).length,
+        all: getGivenNamePool("all", categoryKey).length
+      },
+      samplePools: {
+        boy: getCategoryPool("boy", categoryKey).slice(0, 80),
+        girl: getCategoryPool("girl", categoryKey).slice(0, 80)
+      }
+    }
+  }
+
+  return {
+    version: "2.0.0",
+    license: "Commercial use requires written authorization from the copyright holder.",
+    endpoints: {
+      data: "/api/name-data.json",
+      openapi: "/api/openapi.json"
+    },
+    categories: categories,
+    toneRules: toneRules
+  }
+}
+
+export { getGenerationLimit, getNameCategories, getNameDataset, getTonePattern }
 export default generate
-
-

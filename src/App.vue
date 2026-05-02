@@ -73,12 +73,12 @@
         </div>
         <p v-if="copyMessage" class="copy-toast">{{ copyMessage }}</p>
 
-        <div class="name-grid" aria-live="polite">
+        <div :class="['name-grid', { 'name-grid-wide': category === 'fantasy' }]" aria-live="polite">
           <button
             v-for="(name, index) in resultList"
             :key="`${name}-${index}`"
             type="button"
-            :class="['name-slip', { 'name-slip-long': name.length >= 4 && name.length < 6, 'name-slip-xl': name.length >= 6 }]"
+            :class="['name-slip', { 'name-slip-long': name.length >= 4 }]"
             @click="copyName(name)"
           >
             {{ name }}
@@ -488,6 +488,10 @@ input {
   min-height: 320px;
 }
 
+.name-grid-wide {
+  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+}
+
 .name-slip {
   display: flex;
   align-items: center;
@@ -511,12 +515,7 @@ input {
 }
 
 .name-slip-long {
-  font-size: 20px;
-}
-
-.name-slip-xl {
-  grid-column: span 2;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .name-slip:hover {
@@ -580,16 +579,16 @@ textarea {
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
   }
 
+  .name-grid-wide {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
   .name-slip {
     font-size: 22px;
   }
 
   .name-slip-long {
-    font-size: 18px;
-  }
-
-  .name-slip-xl {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 </style>

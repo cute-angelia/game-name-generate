@@ -47,30 +47,126 @@ var boy1 = ["宇", "翔", "飞", "雄", "帅", "涛", "强", "斌", "昊", "伟"
 
 var girl1 = ["美", "娜", "秀", "雯", "蕾", "洁", "思", "慧", "心", "涵", "静", "英", "晓", "琳", "珊", "莉", "佳", "婷", "璐", "晨", "安", "包", "贝", "冰", "蓓", "珂", "柏", "琳", "菲", "怡", "娜", "心", "洁", "梓", "瑶", "珊", "艾", "诗", "璐", "倩", "苏", "雯", "婧", "秀", "慧", "彤", "媛", "美", "晶", "琪", "云", "萍", "蕾", "莉", "莹", "薇", "楠", "楚", "佳", "爽", "卓", "格", "斌", "羽", "茜", "婷", "琦", "绮", "燕", "张", "青", "红", "翠", "帆", "离", "莲", "宜", "园", "冬", "霜"]
 
+var xianxiaXing = [
+  "风", "云", "雾", "霜", "雪", "冰", "雨", "露", "霞", "虹",
+  "山", "川", "溪", "泉", "谷", "崖", "林", "松", "竹", "梅",
+  "星", "月", "辰", "曦", "穹", "昊", "苍", "青", "白", "蓝",
+  "慕容", "东方", "纳兰", "上官", "南宫", "西门", "北冥",
+  "轩辕", "独孤", "宇文", "尉迟", "公孙", "长孙", "钟离",
+  "澹台", "皇甫", "诸葛", "司马", "欧阳", "夏侯", "淳于"
+]
+
+var xianxiaSingle = [
+  "瑶", "璃", "琼", "琚", "瑾", "瑜", "琛", "璇", "玑", "璞",
+  "烟", "云", "雾", "霭", "岚", "霏", "霖", "霓", "虹", "霞",
+  "霜", "雪", "冰", "露", "溪", "泉", "池", "澜", "波", "涛",
+  "星", "月", "辰", "曦", "晖", "曜", "暝", "暮", "霄", "穹",
+  "清", "雅", "逸", "俊", "朗", "卓", "然", "轩", "昂", "宇",
+  "灵", "慧", "敏", "睿", "智", "贤", "淑", "柔", "婉", "娴",
+  "谦", "和", "安", "宁", "静", "怡", "悦", "欣", "愉", "恬",
+  "寻", "觅", "追", "逐", "随", "伴", "依", "恋", "思", "念",
+  "望", "观", "赏", "品", "悟", "觉", "知", "晓", "明", "察",
+  "舞", "歌", "吟", "咏", "诵", "弦", "笙", "箫", "笛", "琴"
+]
+
+var xianxiaDouble = [
+  "清霜", "傲雪", "凝露", "沐霞", "揽月", "摘星",
+  "听风", "观云", "卧雪", "眠云", "漱石", "枕流",
+  "松涛", "竹韵", "梅香", "兰馨", "菊影", "荷风",
+  "采薇", "蒹葭", "白露", "伊人", "在水", "一方",
+  "望舒", "观涛", "听雨", "吟风", "思远", "念遥",
+  "清逸", "俊朗", "卓然", "轩昂", "灵秀", "慧黠",
+  "温婉", "娴静", "谦和", "安宁", "怡然", "悦心",
+  "清歌", "挽风", "曦和", "晖曜", "暝曛", "昉晗", "晞晟", "晢明"
+]
+
+var modernSingle = [
+  "辰", "宇", "泽", "轩", "涵", "诺", "熙", "宸", "睿", "皓",
+  "桐", "瑶", "琳", "菲", "萌", "汐", "芮", "恬", "悦", "晴",
+  "屿", "川", "野", "禾", "芒", "麦", "荞", "栀", "槿", "栎",
+  "砚", "辞", "叙", "昭", "珩", "璟", "琮", "玹", "琛",
+  "一", "也", "予", "亦", "之", "可", "末", "白", "安",
+  "西", "北", "南", "东", "山", "水", "木", "火", "土", "金"
+]
+
+var modernDouble = [
+  "知夏", "见秋", "念冬", "盼春", "望舒", "观潮",
+  "听风", "眠云", "漱石", "枕流", "清欢", "长乐",
+  "星野", "屿川", "禾芒", "麦荞", "栀槿", "栎砚",
+  "辞叙", "昭珩", "璟琮", "玹琛", "一也", "予亦",
+  "安夏", "暖秋", "凉冬", "初春", "知予", "见可", 
+  "念末", "盼白", "望安", "观西"
+]
+
+var jianghuAction = [
+  "冲", "渡", "照", "独", "绝", "断", "漱", "寒", "凝", "拂", 
+  "疏", "逐", "震", "饮", "弄", "惑", "聆", "归", "啸", "了", 
+  "怀", "云", "清", "剑", "沧", "慕", "晚", "若", "傲", "南", 
+  "孤", "惊", "莫", "凤", "念"
+]
+
+var jianghuNature = [
+  "玄", "石", "锋", "远", "霜", "月", "云", "影", "风", "天", 
+  "雪", "情", "玉", "心", "音", "燕", "之", "尘", "然", "冰", 
+  "蓉", "恩", "霄", "秋", "澜", "晴", "烟", "飞", "城"
+]
+
+var jianghuSingle = [
+  "风", "紫", "蓉", "誉", "峰", "竹", "冲", "渡", "照", "独", 
+  "绝", "断", "剑", "影", "霜", "雪", "尘", "飞", "天", "云", 
+  "秋", "月", "远", "寒", "玉", "心", "音", "燕", "冰", "恩", 
+  "霄", "澜", "晴", "烟", "城", "情"
+]
+
+var jianghuDouble = [];
+for (var _i = 0; _i < jianghuAction.length; _i++) {
+  for (var _j = 0; _j < jianghuNature.length; _j++) {
+    if (jianghuAction[_i] !== jianghuNature[_j]) {
+      jianghuDouble.push(jianghuAction[_i] + jianghuNature[_j]);
+    }
+  }
+}
+
+var fantasyFirst = [
+  "索拉尔", "艾登", "莱因哈特", "加百列", "塞伦", "赫利俄斯", "奥罗拉", "塞莉丝", "艾拉", "安洁莉卡", "露希娅", "丝塔茜", "雷吉斯", "阿尔德林", "达里安", "罗伦斯", "伊莎贝拉", "卡珊德拉", "吉安娜", "艾蕾诺尔",
+  "阿比斯", "瓦勒里昂", "赛拉尔", "达米安", "卢修斯", "马拉基", "黑鸦克罗夫特", "基兰", "谢德", "阿舍尔", "拉撒路斯", "摩尔代卡伊", "尼禄", "阿兹拉尔", "雷莫斯", "阿撒谢尔", "但丁", "马尔萨斯", "泽费尔", "莉莉丝",
+  "奈拉", "塔琳德拉", "伊琳德拉", "费伦", "沙拉拉", "米拉琳", "伊拉娜", "西尔万", "艾尔文", "莱恩伍德", "菲恩", "奥瑞恩", "芙罗拉", "薇尔达", "苔丝", "艾薇", "萝芮尔", "埃里希", "雷恩", "瑟雷斯",
+  "乔里克", "格罗纳克", "杜尔根", "博兰", "托拉克", "奥里克", "卡里克", "戈隆", "哈尔克", "莫克", "拉格", "布鲁格", "塔克", "加尔", "多姆", "卡加斯", "雷克", "姆拉克", "格罗什", "卡恩",
+  "尼德霍格", "卡扎库斯", "霍希穆特", "哈布吉尔", "沃卢斯特", "措尔恩", "韦莱赖", "奈德", "特雷格海特", "摩丽甘", "雷文", "塞蕾娜", "瑟拉芬", "尼克斯", "摩根娜", "珀耳塞福涅", "莉莉安娜", "阿斯花儿", "赫卡忒", "阿祖拉"
+].map(function(name) { return name + "·" });
+
+var fantasyLast = [
+  "辉刃", "圣歌", "耀光", "晨星", "晴空", "焰心", "曦和", "月冕", "圣光", "祈愿", "银翼", "暖阳", "金盾", "圣盾", "光耀", "明辉", "圣心", "光语", "辉耀",
+  "深渊", "暗王", "影魔", "魔裔", "堕光", "暗使", "夜刃", "暗勇", "阴影", "幽魂", "亡骸", "暗眼", "毁灭", "死翼", "暗狼", "腐化", "暗途", "魔主", "暗风", "夜后",
+  "月纱", "叶语", "雨歌", "银谷", "烬光", "亮棘", "幽瓣", "林歌", "翠叶", "深根", "溪语", "星眸", "花颂", "苔痕", "青叶", "藤枝", "月桂", "风语", "雾影", "霜叶",
+  "石息", "铁影", "风暴牙", "恐盔", "风脉", "披风", "碎颅", "血拳", "蛮骨", "战锤", "怒嚎", "锐爪", "裂地", "钢鬃", "刃拳", "断脊", "黑血", "战歌",
+  "蚀骨", "魔喉", "傲颅", "贪噬", "欲焰", "怒鳞", "暴食", "妒影", "惰翼", "战影", "智影", "月魂", "天音", "夜穹", "暗巫", "冥后", "暗夜之花", "亡语", "暗魅", "暗光"
+];
+
 var categoryRules = {
   xianxia: {
     label: "仙侠",
-    description: "从基础大词库中过滤明显现代、年代感、生活化的常用字，保留更适合修真、宗门和山海意象的姓名。",
-    keywords: ["修真", "宗门", "灵气", "山海", "剑修"],
-    blacklist: ["国", "建", "军", "伟", "强", "斌", "勇", "刚", "涛", "栋", "昌", "朋", "宏", "达", "康", "平", "志", "华", "东", "光", "明", "辉", "忠", "民", "胜", "利", "富", "贵", "财", "宝", "家", "校", "城", "坪"]
+    description: "使用专属仙气姓氏库（自然意象+古风复姓）与仙气名库（意境/气质/意象），遵循声律和谐与意境统一原则生成。",
+    keywords: ["修真", "宗门", "灵气", "山海", "剑修", "仙气"],
+    blacklist: []
   },
   modern: {
     label: "现代都市",
-    description: "从基础大词库中过滤强江湖、兵器、玄幻和古风色彩的字，保留更接近日常、职场和校园语感的姓名。",
-    keywords: ["都市", "职场", "校园", "清爽", "现实"],
-    blacklist: ["客", "刀", "剑", "侠", "魔", "妖", "鬼", "魂", "魄", "玄", "烬", "阙", "曜", "狱", "煞", "孤", "冷", "断", "血", "苍", "擎", "霆", "啸", "狂", "虎", "龙"]
+    description: "使用专属现代都市名库（潮流/质感/简约），遵循简洁易记与声律和谐原则生成。",
+    keywords: ["都市", "潮流", "治愈", "清爽", "现实"],
+    blacklist: []
   },
   jianghu: {
     label: "江湖武侠",
-    description: "从基础大词库中过滤现代年代感、商务感和软萌网感的字，保留更适合门派、侠客和行走江湖的姓名。",
+    description: "使用专属武侠名库，遵循中间字为动作/意境、末字为大自然景物的规则组合生成。",
     keywords: ["江湖", "侠客", "门派", "刀剑", "快意"],
-    blacklist: ["国", "建", "军", "伟", "强", "斌", "勇", "刚", "宏", "达", "康", "平", "洋", "鑫", "校", "坪", "甜", "萌", "柠", "橙", "梓", "涵", "诺", "恬", "怡"]
+    blacklist: []
   },
   fantasy: {
-    label: "玄幻",
-    description: "从基础大词库中过滤过于现实、年代感和日常生活化的字，保留更适合异世、神魔和力量体系的姓名。",
-    keywords: ["玄幻", "神魔", "异世", "星海", "血脉"],
-    blacklist: ["国", "建", "军", "伟", "强", "斌", "刚", "宏", "达", "康", "平", "华", "东", "光", "民", "富", "贵", "财", "宝", "家", "校", "坪", "甜", "萌", "柠", "橙"]
+    label: "西方玄幻",
+    description: "使用专属西方玄幻名库，以【音译名·称号/意象】的结构生成，融合光明、黑暗、精灵、兽人及龙族等多种族风格。",
+    keywords: ["西幻", "神魔", "异世", "精灵", "兽人", "深渊"],
+    blacklist: []
   }
 }
 
@@ -206,6 +302,19 @@ function getBasePool(sex) {
 }
 
 function getCategoryPool(sex, category) {
+  if (category === "xianxia") {
+    return getUniqueItems(xianxiaSingle.concat(xianxiaDouble))
+  }
+  if (category === "modern") {
+    return getUniqueItems(modernSingle.concat(modernDouble))
+  }
+  if (category === "jianghu") {
+    return getUniqueItems(jianghuSingle.concat(jianghuDouble))
+  }
+  if (category === "fantasy") {
+    return getUniqueItems(fantasyLast)
+  }
+
   var selected = []
 
   selected = getBasePool(sex).filter(function (name) {
@@ -224,13 +333,27 @@ function getGivenNamePool(sex, category) {
 }
 
 function getGenerationLimit(sex, category) {
-  return Math.min(getUniqueItems(xing).length, getGivenNamePool(sex, category || "all").length)
+  var surnamePool = category === 'xianxia' ? xianxiaXing : category === 'fantasy' ? fantasyFirst : xing;
+  return Math.min(getUniqueItems(surnamePool).length, getGivenNamePool(sex, category || "all").length)
 }
 
 function makeName(sex, category) {
-  var first = getOneInNameArray(xing)
+  var surnamePool = category === 'xianxia' ? xianxiaXing : category === 'fantasy' ? fantasyFirst : xing;
+  var first = getOneInNameArray(surnamePool)
   var pool = getCategoryPool(sex, category)
   var second = getOneInNameArray(pool)
+
+  if (['xianxia', 'modern', 'jianghu', 'fantasy'].indexOf(category) !== -1) {
+    var attempts = 0;
+    while(attempts < 50) {
+      if (first !== second && !(first.length === 1 && second.indexOf(first) !== -1)) {
+        break;
+      }
+      first = getOneInNameArray(surnamePool);
+      second = getOneInNameArray(pool);
+      attempts++;
+    }
+  }
 
   return first + second
 }
@@ -268,12 +391,64 @@ function generate(num, sex, category) {
   var str = "";
   var selectedCategory = category || "all"
   var selectedSex = sex || "all"
+  var surnamePool = selectedCategory === 'xianxia' ? xianxiaXing : selectedCategory === 'fantasy' ? fantasyFirst : xing;
   var max = getGenerationLimit(selectedSex, selectedCategory)
-  var surnames = shuffle(getUniqueItems(xing))
+  var surnames = shuffle(getUniqueItems(surnamePool))
   var givenNames = shuffle(getGivenNamePool(selectedSex, selectedCategory))
 
   if (num > max) {
     throw new RangeError("最多可生成 " + max + " 个不重复姓名")
+  }
+
+  if (['xianxia', 'modern', 'jianghu', 'fantasy'].indexOf(selectedCategory) !== -1) {
+    var results = [];
+    var usedSur = [];
+    var usedGiv = [];
+    var attempts = 0;
+    while (results.length < num && attempts < num * 50) {
+      attempts++;
+      var sur = getOneInNameArray(surnames);
+      var giv = getOneInNameArray(givenNames);
+      
+      if (usedSur.indexOf(sur) !== -1 || usedGiv.indexOf(giv) !== -1) continue;
+      if (sur === giv || (sur.length === 1 && giv.indexOf(sur) !== -1)) continue;
+      
+      if (selectedCategory !== 'fantasy') {
+        try {
+          var surPinyin = pinyin(sur.slice(-1), { toneType: 'none', type: 'array' })[0];
+          var givPinyin = pinyin(giv.charAt(0), { toneType: 'none', type: 'array' })[0];
+          if (surPinyin && givPinyin && surPinyin === givPinyin) continue;
+
+          var fullPinyin = pinyin(sur + giv, { toneType: 'num', type: 'array' });
+          var tones = fullPinyin.map(function(t) { return Number(t.replace(/[^0-9]/g, '')) || 0 });
+          var levelCount = tones.filter(function(t) { return t === 1 || t === 2; }).length;
+          var obliqueCount = tones.filter(function(t) { return t === 3 || t === 4; }).length;
+          if (tones.length >= 3 && (levelCount === 0 || obliqueCount === 0)) continue;
+        } catch (e) {
+          // Fallback if pinyin fails
+        }
+      }
+
+      var fullName = sur + giv;
+      if (results.indexOf(fullName) === -1) {
+        usedSur.push(sur);
+        usedGiv.push(giv);
+        results.push(fullName);
+      }
+    }
+
+    if (results.length < num) {
+      for (i = 0; i < surnames.length; i++) {
+        if (results.length >= num) break;
+        if (usedSur.indexOf(surnames[i]) === -1 && usedGiv.indexOf(givenNames[i]) === -1) {
+          usedSur.push(surnames[i]);
+          usedGiv.push(givenNames[i]);
+          results.push(surnames[i] + givenNames[i]);
+        }
+      }
+    }
+
+    return results.slice(0, num).join("\n") + "\n";
   }
 
   for (; i < num; i++) {

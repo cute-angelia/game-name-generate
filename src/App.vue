@@ -78,7 +78,7 @@
             v-for="(name, index) in resultList"
             :key="`${name}-${index}`"
             type="button"
-            :class="['name-slip', { 'name-slip-long': name.length >= 4 }]"
+            :class="['name-slip', { 'name-slip-long': name.length >= 4 && name.length < 6, 'name-slip-xl': name.length >= 6 }]"
             @click="copyName(name)"
           >
             {{ name }}
@@ -506,12 +506,17 @@ input {
   line-height: 1;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: clip;
+  text-overflow: ellipsis;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .name-slip-long {
   font-size: 20px;
+}
+
+.name-slip-xl {
+  grid-column: span 2;
+  font-size: 16px;
 }
 
 .name-slip:hover {
@@ -581,6 +586,10 @@ textarea {
 
   .name-slip-long {
     font-size: 18px;
+  }
+
+  .name-slip-xl {
+    font-size: 15px;
   }
 }
 </style>

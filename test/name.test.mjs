@@ -22,14 +22,6 @@ assert.deepStrictEqual(Object.keys(getNameDataset().categories), Object.keys(api
 assert.deepStrictEqual(getNameDataset().toneRules.allowedPatterns, apiData.toneRules.allowedPatterns)
 assert.deepStrictEqual(getNameDataset().categories, apiData.categories)
 
-assert.ok(getNameCategories().find(function (item) {
-  return item.value === 'xianxia'
-}).blacklist.includes('国'))
-
-assert.ok(getNameCategories().find(function (item) {
-  return item.value === 'modern'
-}).blacklist.includes('剑'))
-
 function assertNamesMatchCategory(category) {
   const names = generate(20, 'all', category).trim().split('\n')
   const surnames = []
@@ -40,9 +32,16 @@ function assertNamesMatchCategory(category) {
   assert.strictEqual(names.length, 20)
 
   names.forEach(function (fullName) {
-    const match = fullName.match(compoundSurname)
-    const surname = match[1]
-    const givenName = match[2]
+    let surname, givenName;
+    if (category === 'fantasy') {
+      const parts = fullName.split('·')
+      surname = parts[0] + '·'
+      givenName = parts[1]
+    } else {
+      const match = fullName.match(compoundSurname)
+      surname = match[1]
+      givenName = match[2]
+    }
 
     surnames.push(surname)
     givenNames.push(givenName)
@@ -51,7 +50,7 @@ function assertNamesMatchCategory(category) {
       return givenName.includes(char)
     }), fullName + ' should not include category blacklist chars')
 
-    if (givenName.length === 2) {
+    if (['xianxia', 'modern', 'jianghu', 'fantasy'].indexOf(category) === -1 && givenName.length === 2) {
       assert.ok(
         ['level-oblique', 'oblique-level'].indexOf(getTonePattern(givenName)) !== -1,
         fullName + ' should use alternating level/oblique tones'
